@@ -1,26 +1,23 @@
 # Hotel API
 
-Bem-vindo à API do Hotel, um sistema para gerenciar clientes e reservas em um hotel.
+Bem-vindo à API do Hotel, um projeto Spring Boot para gerenciar clientes e reservas em um hotel.
 
-## Tecnologias Utilizadas
+## Configuração
 
-- Java 17
-- Spring Framework 3.2.1
-- PostgreSQL
-- Gradle
-- SLF4J para logs
+### Banco de Dados
 
-## Configuração do Banco de Dados
-
-A aplicação utiliza o PostgreSQL como banco de dados. Certifique-se de configurar as propriedades adequadas no arquivo `application.yml`:
+A aplicação utiliza o PostgreSQL como banco de dados. Certifique-se de ter um servidor PostgreSQL em execução e atualize as configurações de banco de dados no arquivo `src/main/resources/application.yml` conforme necessário:
 
 ```yaml
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
+    url: jdbc:postgresql://localhost:5432/hoteldb
     username: postgres
     password: admin
     driver-class-name: org.postgresql.Driver
+    hikari:
+      connection-timeout: 20000
+      maximum-pool-size: 5
   jpa:
     hibernate:
       ddl-auto: update
@@ -28,76 +25,66 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+  sql:
+    init:
+      platform: postgres
+    data:
+      platform: postgres
+  liquibase:
+    enabled: false  # Desativa o Liquibase para evitar conflitos com o Hibernate durante a inicialização
 ```
 
-## Endpoints da API
+### Spring Boot Actuator
 
-### Clientes
+A aplicação utiliza o Spring Boot Actuator para fornecer endpoints prontos para produção. Você pode acessar esses endpoints para obter informações sobre o estado da aplicação, métricas e muito mais.
 
-- **Cadastrar Cliente (POST):** `/api/clientes`
-  ```json
-  {
-    "nome": "Nome do Cliente",
-    "email": "cliente@email.com",
-    "telefone": "123456789"
-  }
-  ```
+Para acessar os endpoints do Spring Boot Actuator, vá para `http://localhost:8080/actuator`. Certifique-se de configurar corretamente a segurança para proteger esses endpoints em um ambiente de produção.
 
-- **Obter Todos os Clientes (GET):** `/api/clientes`
+Para uma visão mais visual e interativa dos dados fornecidos pelo Spring Boot Actuator, você pode configurar o Spring Boot Admin. Consulte as instruções no código para adicionar a dependência e configurar o cliente Spring Boot Admin.
 
-- **Obter Cliente por ID (GET):** `/api/clientes/{id}`
+## Endpoints
 
-- **Atualizar Cliente por ID (PUT):** `/api/clientes/{id}`
-  ```json
-  {
-    "nome": "Novo Nome do Cliente",
-    "email": "novo_cliente@email.com",
-    "telefone": "987654321"
-  }
-  ```
+A API oferece os seguintes endpoints principais:
 
-- **Deletar Cliente por ID (DELETE):** `/api/clientes/{id}`
+- `POST /api/clientes`: Cadastrar um novo cliente.
+- `GET /api/clientes`: Obter todos os clientes cadastrados.
+- `GET /api/clientes/{id}`: Obter detalhes de um cliente específico.
+- `PUT /api/clientes/{id}`: Atualizar informações de um cliente.
+- `DELETE /api/clientes/{id}`: Deletar um cliente.
 
-### Reservas
+- `POST /api/reservas`: Criar uma nova reserva.
+- `GET /api/reservas`: Obter todas as reservas.
+- `GET /api/reservas/{id}`: Obter detalhes de uma reserva específica.
+- `PUT /api/reservas/{id}`: Atualizar informações de uma reserva.
+- `DELETE /api/reservas/{id}`: Deletar uma reserva.
 
-- **Criar Reserva (POST):** `/api/reservas`
-  ```json
-  {
-    "dataInicio": "2023-01-01",
-    "dataFim": "2023-01-10",
-    "cliente": {
-      "id": 1,
-      "nome": "Nome do Cliente",
-      "email": "cliente@email.com",
-      "telefone": "123456789"
-    },
-    "tipoQuarto": "Quarto Duplo",
-    "pagamentoConfirmado": false
-  }
-  ```
+## Como Executar
 
-- **Obter Todas as Reservas (GET):** `/api/reservas`
+1. Clone o repositório:
 
-- **Obter Reserva por ID (GET):** `/api/reservas/{id}`
+   ```bash
+   git clone https://github.com/samuel-barbosa97/hotel-api.git
+   ```
 
-- **Atualizar Reserva por ID (PUT):** `/api/reservas/{id}`
-  ```json
-  {
-    "dataInicio": "2023-02-01",
-    "dataFim": "2023-02-10",
-    "cliente": {
-      "id": 1,
-      "nome": "Nome Atualizado do Cliente",
-      "email": "novo_cliente@email.com",
-      "telefone": "987654321"
-    },
-    "tipoQuarto": "Quarto VIP",
-    "pagamentoConfirmado": true
-  }
-  ```
+2. Navegue até o diretório do projeto:
 
-- **Deletar Reserva por ID (DELETE):** `/api/reservas/{id}`
+   ```bash
+   cd hotel-api
+   ```
 
-## Em Construção
+3. Execute a aplicação Spring Boot:
 
-Este projeto está em construção, e mais funcionalidades serão adicionadas em breve.
+   ```bash
+   ./gradlew bootRun
+   ```
+
+4. Acesse a API em `http://localhost:8080`.
+
+## Contribuições
+
+Contribuições são bem-vindas! Sinta-se à vontade para abrir problemas (issues) e enviar pull requests para melhorar esta aplicação.
+
+## Licença
+
+Este projeto está licenciado sob a [Licença MIT](LICENSE).

@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository; // Importando JpaR
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ReservaRepository extends JpaRepository<Reserva, Long> { // Alterando para JpaRepository
+public interface ReservaRepository extends JpaRepository<Reserva, Long> {
 }

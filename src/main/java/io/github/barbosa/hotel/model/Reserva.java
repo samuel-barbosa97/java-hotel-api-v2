@@ -18,14 +18,11 @@ public class Reserva {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private LocalDate dataInicio;
     private LocalDate dataFim;
-
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
-
     private String tipoQuarto;
     private boolean pagamentoConfirmado;
 }

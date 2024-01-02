@@ -48,8 +48,8 @@ jobs:
 
     - name: Build com o Gradle
       run: |
-        ./gradlew build
-
+        ./gradlew build --warning-mode all
+        
     - name: Executar os testes
       run: |
         ./gradlew test

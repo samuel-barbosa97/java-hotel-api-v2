@@ -50,4 +50,29 @@ public class ClienteController {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Cliente> atualizarCliente(@PathVariable Long id, @RequestBody Cliente cliente) {
+        logger.info("Recebendo solicitação para atualizar cliente com ID {}: {}", id, cliente);
+        Cliente clienteAtualizado = clienteService.atualizarCliente(id, cliente);
+        if (clienteAtualizado != null) {
+            logger.info("Cliente atualizado com sucesso: {}", clienteAtualizado);
+            return new ResponseEntity<>(clienteAtualizado, HttpStatus.OK);
+        } else {
+            logger.info("Cliente não encontrado com ID: {}", id);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Cliente> deletarCliente(@PathVariable Long id) {
+        logger.info("Recebendo solitação para deletar cliente com ID: {}", id);
+        if (clienteService.deletarCliente(id)) {
+            logger.info("Cliente deletado com sucesso.");
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            logger.info("Cliente não encontrado com ID: {}", id);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

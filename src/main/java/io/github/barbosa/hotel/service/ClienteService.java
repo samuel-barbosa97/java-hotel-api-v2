@@ -26,4 +26,22 @@ public class ClienteService {
         Optional<Cliente> optionalCliente = clienteRepository.findById(id);
         return optionalCliente.orElse(null);
     }
+
+    public Cliente atualizarCliente(Long id, Cliente cliente) {
+        if (clienteRepository.existsById(id)) {
+            cliente.setId(id);
+            return clienteRepository.save(cliente);
+        } else {
+            return null;
+        }
+    }
+
+    public boolean deletarCliente(Long id) {
+        if (clienteRepository.existsById(id)) {
+            clienteRepository.deleteById(id);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

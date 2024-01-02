@@ -34,7 +34,7 @@ jobs:
         distribution: 'temurin'
 
     - name: Cache das dependências do Gradle
-      uses: actions/cache@v2
+      uses: actions/cache@v2.1.6  # Atualizado para a versão mais recente
       with:
         path: |
           ~/.gradle/caches
@@ -49,10 +49,6 @@ jobs:
     - name: Build com o Gradle
       run: |
         ./gradlew build --warning-mode all
-        
-    - name: Executar os testes
-      run: |
-        ./gradlew test
 
     - name: Verificar a qualidade do código
       run: |

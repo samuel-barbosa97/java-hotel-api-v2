@@ -38,8 +38,8 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    implementation 'de.codecentric:spring-boot-admin-starter-client:2.5.2' // Certifique-se de usar a versão mais recente
-    testImplementation 'com.h2database:h2:2.2.220'
+    implementation 'de.codecentric:spring-boot-admin-starter-client:2.5.2'
+    testImplementation 'org.postgresql:postgresql:42.5.1'
 }
 
 tasks.named('test') {

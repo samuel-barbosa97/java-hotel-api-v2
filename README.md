@@ -2,6 +2,10 @@
 
 Bem-vindo à API do Hotel, um projeto Spring Boot para gerenciar clientes e reservas em um hotel.
 
+## Actions
+
+[![Java CI with Gradle](https://github.com/samuel-barbosa97/java-hotel-api-v2/actions/workflows/gradle.yml/badge.svg?branch=main)](https://github.com/samuel-barbosa97/java-hotel-api-v2/actions/workflows/gradle.yml)
+
 ## Configuração
 
 ### Banco de Dados

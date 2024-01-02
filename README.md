@@ -1,45 +1,103 @@
 # Hotel API
 
-Bem-vindo à API do Hotel! Este projeto está em construção e destina-se a fornecer funcionalidades básicas para um sistema de gerenciamento de hotel, incluindo o cadastro de clientes e a criação de reservas.
+Bem-vindo à API do Hotel, um sistema para gerenciar clientes e reservas em um hotel.
 
 ## Tecnologias Utilizadas
 
 - Java 17
-- Spring Boot 3.2.1
+- Spring Framework 3.2.1
 - PostgreSQL
 - Gradle
+- SLF4J para logs
 
-## Como Contribuir
+## Configuração do Banco de Dados
 
-1. Faça um Fork do repositório.
-2. Crie sua branch de recurso (`git checkout -b feature/seu-recurso`).
-3. Commit suas alterações (`git commit -m 'Adiciona novo recurso'`).
-4. Push para a branch (`git push origin feature/seu-recurso`).
-5. Abra um Pull Request.
+A aplicação utiliza o PostgreSQL como banco de dados. Certifique-se de configurar as propriedades adequadas no arquivo `application.yml`:
 
-## Instalação Local
+```yaml
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: admin
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+```
 
-1. Clone o repositório: `git clone https://github.com/samuel-barbosa97/hotel-api.git`.
-2. Navegue até o diretório do projeto: `cd hotel-api`.
-3. Execute a aplicação: `./gradlew bootRun`.
+## Endpoints da API
 
-A aplicação estará disponível em `http://localhost:8080`.
+### Clientes
 
-## Endpoints Disponíveis
+- **Cadastrar Cliente (POST):** `/api/clientes`
+  ```json
+  {
+    "nome": "Nome do Cliente",
+    "email": "cliente@email.com",
+    "telefone": "123456789"
+  }
+  ```
 
-- **Clientes:**
-  - `POST /clientes`: Cadastra um novo cliente.
+- **Obter Todos os Clientes (GET):** `/api/clientes`
 
-- **Reservas:**
-  - `POST /reservas`: Cria uma nova reserva.
+- **Obter Cliente por ID (GET):** `/api/clientes/{id}`
 
-## Contribuidores
+- **Atualizar Cliente por ID (PUT):** `/api/clientes/{id}`
+  ```json
+  {
+    "nome": "Novo Nome do Cliente",
+    "email": "novo_cliente@email.com",
+    "telefone": "987654321"
+  }
+  ```
 
-- [Samuel Barbosa](https://github.com/samuel-barbosa97)
+- **Deletar Cliente por ID (DELETE):** `/api/clientes/{id}`
 
-## Aviso
+### Reservas
 
-Este projeto está em construção. Funcionalidades adicionais e melhorias serão implementadas futuramente.
+- **Criar Reserva (POST):** `/api/reservas`
+  ```json
+  {
+    "dataInicio": "2023-01-01",
+    "dataFim": "2023-01-10",
+    "cliente": {
+      "id": 1,
+      "nome": "Nome do Cliente",
+      "email": "cliente@email.com",
+      "telefone": "123456789"
+    },
+    "tipoQuarto": "Quarto Duplo",
+    "pagamentoConfirmado": false
+  }
+  ```
 
-Sinta-se à vontade para contribuir ou relatar problemas!
+- **Obter Todas as Reservas (GET):** `/api/reservas`
 
+- **Obter Reserva por ID (GET):** `/api/reservas/{id}`
+
+- **Atualizar Reserva por ID (PUT):** `/api/reservas/{id}`
+  ```json
+  {
+    "dataInicio": "2023-02-01",
+    "dataFim": "2023-02-10",
+    "cliente": {
+      "id": 1,
+      "nome": "Nome Atualizado do Cliente",
+      "email": "novo_cliente@email.com",
+      "telefone": "987654321"
+    },
+    "tipoQuarto": "Quarto VIP",
+    "pagamentoConfirmado": true
+  }
+  ```
+
+- **Deletar Reserva por ID (DELETE):** `/api/reservas/{id}`
+
+## Em Construção
+
+Este projeto está em construção, e mais funcionalidades serão adicionadas em breve.

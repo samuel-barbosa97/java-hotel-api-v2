@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
-@Table(name = "reservas") // Especificando o nome da tabela
+@Table(name = "reservas")
 public class Reserva {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +23,7 @@ public class Reserva {
     private LocalDate dataFim;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id") // Adicionando uma coluna de chave estrangeira para representar o cliente
+    @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
     private String tipoQuarto;

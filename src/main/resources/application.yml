@@ -28,3 +28,16 @@ logging:
     org:
       hibernate:
         SQL: debug
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  # Habilita todos os endpoints
+
+  boot:
+    admin:
+      client:
+        url: http://localhost:8080  # URL do servidor Spring Boot Admin
+    application:
+      name: hotel-api  # Nome da aplicação no Spring Boot Admin

@@ -65,7 +65,6 @@ public class ReservaController {
                         reserva.getId(), reserva.getDataInicio(), reserva.getDataFim());
                 return new ResponseEntity<>(reserva, HttpStatus.OK);
             } else {
-                logger.info("Reserva não encontrada com ID: {}", id);
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         } catch (Exception e) {
@@ -86,7 +85,6 @@ public class ReservaController {
                         reservaAtualizada.getId(), reservaAtualizada.getDataInicio(), reservaAtualizada.getDataFim());
                 return new ResponseEntity<>(reservaAtualizada, HttpStatus.OK);
             } else {
-                logger.info("Reserva não encontrada com ID: {}", id);
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         } catch (Exception e) {

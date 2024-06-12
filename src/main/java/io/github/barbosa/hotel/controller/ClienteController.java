@@ -55,7 +55,6 @@ public class ClienteController {
                 logger.info("Cliente encontrado: {}", cliente);
                 return new ResponseEntity<>(cliente, HttpStatus.OK);
             } else {
-                logger.info("Cliente não encontrado com ID: {}", id);
                 return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
             }
         } catch (Exception e) {
@@ -73,7 +72,6 @@ public class ClienteController {
                 logger.info("Cliente atualizado com sucesso: {}", clienteAtualizado);
                 return new ResponseEntity<>(clienteAtualizado, HttpStatus.OK);
             } else {
-                logger.info("Cliente não encontrado com ID: {}", id);
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         } catch (Exception e) {
